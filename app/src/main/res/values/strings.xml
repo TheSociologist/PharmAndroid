@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">PharmAndroid</string>
-    <string name="title_home">Home</string>
+    <string name="app_name">Pharm</string>
+    <string name="title_medList">Medication List</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_manage">Manage Users</string>
+    <string name="title_activity_medication_list">MedicationListActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

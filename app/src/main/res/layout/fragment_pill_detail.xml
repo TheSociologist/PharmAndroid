@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".Medication.PillDetailFragment">
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" app:cardElevation="12dp" app:cardCornerRadius="15dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:text="Name"
+                    android:ems="10"
+                    android:id="@+id/pillName" app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toTopOf="@+id/pillTotal"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="198dp"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/pillTotal" android:hint="Total" android:text="0"
+                    app:layout_constraintTop_toBottomOf="@+id/pillName" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/pillDose" android:layout_marginEnd="2dp"/>
+            <EditText
+                    android:layout_width="180dp"
+                    android:layout_height="45dp"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/pillDose"
+                    android:hint="Dose" android:text="0" app:layout_constraintStart_toEndOf="@+id/pillTotal"
+                    android:layout_marginStart="2dp" android:layout_marginBottom="641dp"
+                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp" android:layout_marginTop="45dp"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            <EditText
+                    android:layout_width="216dp"
+                    android:layout_height="67dp"
+                    android:inputType="textMultiLine"
+                    android:gravity="start|top"
+                    android:ems="10"
+                    android:id="@+id/pillInfo"
+                    android:layout_marginTop="168dp"
+                    app:layout_constraintTop_toBottomOf="@+id/pillTotal" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="3dp" android:layout_marginBottom="428dp"
+                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="195dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

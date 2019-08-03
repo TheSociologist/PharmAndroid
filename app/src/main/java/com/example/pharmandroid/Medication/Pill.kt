@@ -1,9 +1,12 @@
-package com.example.pharm.PillList
+package com.example.pharmandroid.Medication
 
 import android.util.Log
 import java.time.LocalDate
 
-class Pill constructor(var name: String, var total: Int, var dose: Int) {
+class Pill {
+    var name: String
+    var total: Int
+    var dose: Int
     var Rx: Int?
     var NDC: Int?
     var Information: String?
@@ -16,6 +19,9 @@ class Pill constructor(var name: String, var total: Int, var dose: Int) {
     var PrescribedDate: LocalDate?
 
     init {
+        name = ""
+        total = 0
+        dose = 0
         Rx = null
         NDC = null
         Information = null
@@ -80,6 +86,6 @@ class Pill constructor(var name: String, var total: Int, var dose: Int) {
         for ( i in 1..dose){
             Log.d("DISPENSING", i.toString())
         }
-        total -= dose
+        total = total - dose
     }
 }
