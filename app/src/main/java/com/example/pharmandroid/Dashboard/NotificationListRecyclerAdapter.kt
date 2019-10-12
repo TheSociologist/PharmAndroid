@@ -1,4 +1,4 @@
-package com.example.pharmandroid.Medication
+package com.example.pharmandroid.Dashboard
 
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
@@ -9,16 +9,16 @@ import android.widget.TextView
 import com.example.pharmandroid.R
 
 
-import com.example.pharmandroid.Medication.MedicationListFragment.OnListFragmentInteractionListener
-import com.example.pharmandroid.Models.Medication.Pill
+import com.example.pharmandroid.Dashboard.DashboardFragment.OnListFragmentInteractionListener
 import com.google.android.material.snackbar.Snackbar
+import com.example.pharmandroid.Models.Notifications.LowPillCount
 
-import kotlinx.android.synthetic.main.pill_card.view.*
+import kotlinx.android.synthetic.main.notification_card.view.*
 
-class MedicationListRecyclerAdapter(
-    private val mValues: List<Pill>,
+class NotificationListRecyclerAdapter(
+    private val mValues: List<LowPillCount>,
     private val mListener: OnListFragmentInteractionListener?
-) : RecyclerView.Adapter<MedicationListRecyclerAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<NotificationListRecyclerAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
     private var listener: (() -> Unit)? = null
@@ -29,7 +29,7 @@ class MedicationListRecyclerAdapter(
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as Pill
+            val item = v.tag as LowPillCount
             mListener?.onListFragmentInteraction(item)
             Log.d("clicked", item.name)
             Snackbar.make(
@@ -42,15 +42,13 @@ class MedicationListRecyclerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.pill_card, parent, false)
+            .inflate(R.layout.notification_card, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.Name.text = item.name
-        holder.Information.text = item.Information
-        holder.Total.text = item.total.toString() + " Pills Left"
+        holder.Type.text = "Only " + item.num.toString() + " " + item.name + " left"
 
         with(holder.mView) {
             tag = item
@@ -61,8 +59,6 @@ class MedicationListRecyclerAdapter(
     override fun getItemCount(): Int = mValues.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val Name: TextView = mView.pillName
-        val Information: TextView = mView.pillInfo
-        val Total: TextView = mView.pillTotal
+        val Type: TextView = mView.noteType
     }
 }

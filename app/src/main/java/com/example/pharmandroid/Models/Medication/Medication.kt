@@ -1,38 +1,22 @@
-package com.example.pharmandroid.Medication
+package com.example.pharmandroid.Models.Medication
 
 import android.util.Log
 import java.time.LocalDate
 
-class Pill {
-    var name: String
-    var total: Int
-    var dose: Int
-    var Rx: Int?
-    var NDC: Int?
-    var Information: String?
-    var Directions: String?
-    var ActiveIngredients: List<String>?
-    var InactiveIngredients: List<String>?
-    var Mass: Int?
-    var Week: Array<Boolean>
-    var ExpiryDate: LocalDate?
-    var PrescribedDate: LocalDate?
+abstract class Medication {
+    abstract val total: Any
+    abstract val dose: Any
+    var name: String = ""
+    var Rx: Int? = null
+    var NDC: Int? = null
+    var Information: String = ""
+    var Directions: String = ""
+    var ActiveIngredients: List<String>? = null
+    var InactiveIngredients: List<String>? = null
+    var Week: Array<Boolean> = arrayOf(false, false, false, false, false, false, false)
+    var ExpiryDate: LocalDate = LocalDate.now()
+    var PrescribedDate: LocalDate = LocalDate.now()
 
-    init {
-        name = ""
-        total = 0
-        dose = 0
-        Rx = null
-        NDC = null
-        Information = null
-        Directions = null
-        ActiveIngredients = null
-        InactiveIngredients = null
-        Mass = null
-        Week = arrayOf(false, false, false, false, false, false, false)
-        ExpiryDate = null
-        PrescribedDate = null
-    }
     fun addDay(varargs: String) {
         for (String in varargs){
             when (varargs) {
@@ -67,10 +51,9 @@ class Pill {
 
         }
 
-        fun totalupdate() {
-            this.total -= this.dose
-        }
+
     }
+
 
     fun setExpiryDate(Day: Int, Month: Int, Year: Int){
         ExpiryDate = LocalDate.of(Year, Month, Day)
@@ -78,14 +61,7 @@ class Pill {
     fun setPrescribedDate(Day: Int, Month: Int, Year: Int){
         PrescribedDate = LocalDate.of(Year, Month, Day)
     }
-    fun setPrescribedDateNow(){
-        PrescribedDate = LocalDate.now()
-    }
 
-    fun dispense(dose: Int){
-        for ( i in 1..dose){
-            Log.d("DISPENSING", i.toString())
-        }
-        total = total - dose
-    }
+    abstract fun dispense(dose: Int)
+    abstract fun dispense()
 }

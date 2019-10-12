@@ -1,23 +1,44 @@
 package com.example.pharmandroid
 
+import android.app.Notification
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.net.Uri
-import androidx.fragment.app.Fragment
 import com.example.pharmandroid.Dashboard.DashboardFragment
+import com.example.pharmandroid.Dashboard.NotificationDetailFragment
 import com.example.pharmandroid.Manage.ManageFragment
+import com.example.pharmandroid.Manage.UserDetailFragment
 import com.example.pharmandroid.Medication.MedicationListFragment
-import com.example.pharmandroid.Medication.Pill
+import com.example.pharmandroid.Models.Medication.Pill
 import com.example.pharmandroid.Medication.PillDetailFragment
+import com.example.pharmandroid.Models.Notifications.LowPillCount
+import com.example.pharmandroid.Models.User.User
 
 
 class MainActivity : AppCompatActivity(), MedicationListFragment.OnListFragmentInteractionListener,
-    DashboardFragment.OnFragmentInteractionListener, ManageFragment.OnFragmentInteractionListener,
-    PillDetailFragment.OnFragmentInteractionListener {
+    DashboardFragment.OnListFragmentInteractionListener, ManageFragment.OnListFragmentInteractionListener,
+    PillDetailFragment.OnFragmentInteractionListener, UserDetailFragment.OnFragmentInteractionListener,
+    NotificationDetailFragment.OnFragmentInteractionListener {
 
     override fun onListFragmentInteraction(item: Pill) {
         val fragment = PillDetailFragment.newInstance(item)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+            .commit()
+    }
+
+    override fun onListFragmentInteraction(item: LowPillCount) {
+        val fragment = NotificationDetailFragment.newInstance(item)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+            .commit()
+    }
+
+    override fun onListFragmentInteraction(item: User) {
+        val fragment = UserDetailFragment.newInstance(item)
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.container, fragment, fragment.javaClass.simpleName)

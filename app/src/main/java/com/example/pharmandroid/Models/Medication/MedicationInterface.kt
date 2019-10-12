@@ -1,0 +1,3 @@
+package com.example.pharmandroid.Models.Medication
+
+interface MedicationInterface

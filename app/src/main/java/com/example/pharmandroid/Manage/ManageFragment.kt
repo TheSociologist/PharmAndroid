@@ -1,40 +1,28 @@
 package com.example.pharmandroid.Manage
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import com.example.pharmandroid.Models.User.User
 import com.example.pharmandroid.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [ManageFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [ManageFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class ManageFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+    val userList = UserList
+    private var columnCount = 1
+
+    private var listener: OnListFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            columnCount = it.getInt(ARG_COLUMN_COUNT)
         }
     }
 
@@ -42,21 +30,44 @@ class ManageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manage, container, false)
-    }
+        userList.removeAll()
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+        var user1: User = User()
+        user1.firstName = "Ajan"
+        user1.lastName = "Prabakar"
+
+        var user2: User = User()
+        user2.firstName = "Alvin"
+        user2.lastName = "He"
+
+        var user3: User = User()
+        user3.firstName = "Brayden"
+        user3.lastName = "Woods"
+
+        userList.add(user1)
+        userList.add(user2)
+        userList.add(user3)
+
+        val view = inflater.inflate(R.layout.fragment_manage, container, false)
+
+        if (view is RecyclerView) {
+            with(view) {
+                layoutManager = when {
+                    columnCount <= 1 -> LinearLayoutManager(context)
+                    else -> GridLayoutManager(context, columnCount)
+                }
+                adapter = UserListRecyclerAdapter(userList.UserList, listener)
+            }
+        }
+        return view
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
+        if (context is OnListFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
         }
     }
 
@@ -65,38 +76,20 @@ class ManageFragment : Fragment() {
         listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+    interface OnListFragmentInteractionListener {
+        fun onListFragmentInteraction(item: User) {}
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ManageFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+        // TODO: Customize parameter argument names
+        const val ARG_COLUMN_COUNT = "column-count"
+
+        // TODO: Customize parameter initialization
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(columnCount: Int) =
             ManageFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putInt(ARG_COLUMN_COUNT, columnCount)
                 }
             }
     }

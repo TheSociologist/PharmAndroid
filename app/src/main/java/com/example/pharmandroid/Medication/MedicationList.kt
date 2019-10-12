@@ -1,39 +1,29 @@
 package com.example.pharmandroid.Medication
 
-object MedicationList {
-    val PillList: MutableList<Pill>
-    val LiquidList: MutableList<Inhalant>
-    val InhalantList: MutableList<Inhalant>
+import com.example.pharmandroid.Models.Medication.Liquid
+import com.example.pharmandroid.Models.Medication.Pill
 
-    init {
-        PillList = mutableListOf()
-        LiquidList = mutableListOf()
-        InhalantList = mutableListOf()
+class MedicationList(val pillSize: Int, val liquidSize: Int) {
+    var PillList = ArrayList<Pill?>()
+    var LiquidList = ArrayList<Liquid?>()
+
+    fun add(pill: Pill, slot: Int) {
+        var index = slot + 1
+        PillList[index] = pill
     }
 
-    fun addPill(pill: Pill) {
-        PillList.add(pill)
+    fun add(liquid: Liquid, slot: Int) {
+        var index = slot + 1
+        LiquidList[index] = liquid
     }
 
-    fun removePill(pill: Pill) {
-        PillList.remove(pill)
+    fun removePill(slot: Int) {
+        var index = slot + 1
+        PillList[index] = null
     }
 
-    fun removePills() {
-        PillList.clear()
-    }
-
-    fun removeLiquids() {
-        PillList.clear()
-    }
-
-    fun removeInhalants() {
-        InhalantList.clear()
-    }
-
-    fun removeAll() {
-        PillList.clear()
-        LiquidList.clear()
-        InhalantList.clear()
+    fun removeLiquid(packet: Int) {
+        var index = packet + 1
+        LiquidList[index] = null
     }
 }
