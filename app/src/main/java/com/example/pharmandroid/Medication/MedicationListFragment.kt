@@ -1,6 +1,7 @@
 package com.example.pharmandroid.Medication
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -9,11 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.pharmandroid.Models.Medication.Inhalant
+import com.example.pharmandroid.Models.Medication.Liquid
+import com.example.pharmandroid.Models.Medication.Medication
 import com.example.pharmandroid.Models.Medication.Pill
 import com.example.pharmandroid.R
 
 class MedicationListFragment : Fragment() {
-    val medicationList = MasterMedicationList
+    val medicationList = MedicationList
     private var columnCount = 1
 
     private var listener: OnListFragmentInteractionListener? = null
@@ -30,7 +34,7 @@ class MedicationListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        medicationList.removePills()
+        medicationList.clear()
 
         var pill = Pill()
         pill.name = "Tylenol"
@@ -38,6 +42,8 @@ class MedicationListFragment : Fragment() {
         pill.dose = 2
         pill.Information =
             "Tylenol (acetaminophen) is a pain reliever and a fever reducer. Tylenol is used to treat many conditions such as headache, muscle aches, arthritis, backache, toothaches, colds, and fevers."
+        pill.canDispense = false
+
 
         var pill2 = Pill()
         pill2.name = "Ibuprofen"
@@ -46,16 +52,24 @@ class MedicationListFragment : Fragment() {
         pill2.Information =
             "Ibuprofen is a nonsteroidal anti-inflammatory drug (NSAID). It works by reducing hormones that cause inflammation and pain in the body. Ibuprofen is used to reduce fever and treat pain or inflammation caused by many conditions such as headache, toothache, back pain, arthritis, menstrual cramps, or minor injury."
 
-        var pill3 = Pill()
-        pill3.name = "Claritin"
-        pill3.total = 26
-        pill3.dose = 3
+        var pill3 = Inhalant()
+        pill3.name = "Albuterol"
+        pill3.total = 26.0
+        pill3.dose = 3.0
         pill3.Information =
-            "Claritin is an anti-histamine used to treat allergies."
+            "Albuterol is a stimulant used to respiratory distress."
 
-        medicationList.addPill(pill)
-        medicationList.addPill(pill2)
-        medicationList.addPill(pill3)
+
+        var liquid = Liquid()
+        liquid.name = "Nyquil"
+        liquid.total = 34.0
+        liquid.dose = 2.0
+        liquid.Information = "Used to treat coughs"
+
+        medicationList.add(pill)
+        medicationList.add(pill2)
+        medicationList.add(pill3)
+        medicationList.add(liquid)
 
         val view = inflater.inflate(R.layout.fragment_medicationlist_list, container, false)
 
@@ -65,7 +79,7 @@ class MedicationListFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MedicationListRecyclerAdapter(medicationList.PillList, listener)
+                adapter = MedicationListRecyclerAdapter(medicationList.CompleteList, listener)
             }
         }
         return view
@@ -85,15 +99,14 @@ class MedicationListFragment : Fragment() {
         listener = null
     }
 
+
     interface OnListFragmentInteractionListener {
-        fun onListFragmentInteraction(item: Pill) {}
+        fun onListFragmentInteraction(item: Medication) {}
     }
 
     companion object {
-        // TODO: Customize parameter argument names
         const val ARG_COLUMN_COUNT = "column-count"
 
-        // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
             MedicationListFragment().apply {

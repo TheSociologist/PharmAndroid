@@ -6,7 +6,8 @@ import com.example.pharmandroid.Models.Medication.Medication
 class Liquid : Medication() {
     override var dose: Double = 0.0
     override var total: Double = 0.0
-
+    override val type = "liquid"
+    override var canDispense = true
 
     override fun dispense(dose: Int) {
         total -= dose

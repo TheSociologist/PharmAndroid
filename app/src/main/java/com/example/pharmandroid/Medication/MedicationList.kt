@@ -1,29 +1,46 @@
 package com.example.pharmandroid.Medication
 
+import com.example.pharmandroid.Models.Medication.Inhalant
 import com.example.pharmandroid.Models.Medication.Liquid
+import com.example.pharmandroid.Models.Medication.Medication
 import com.example.pharmandroid.Models.Medication.Pill
 
-class MedicationList(val pillSize: Int, val liquidSize: Int) {
-    var PillList = ArrayList<Pill?>()
-    var LiquidList = ArrayList<Liquid?>()
+object MedicationList {
+    val CompleteList: MutableList<Medication> = mutableListOf()
 
-    fun add(pill: Pill, slot: Int) {
-        var index = slot + 1
-        PillList[index] = pill
+    fun add(pill: Pill) {
+        if (CompleteList.contains(pill)) return
+        CompleteList.add(pill)
     }
 
-    fun add(liquid: Liquid, slot: Int) {
-        var index = slot + 1
-        LiquidList[index] = liquid
+    fun add(liquid: Liquid) {
+        if (CompleteList.contains(liquid)) return
+        CompleteList.add(liquid)
+
     }
 
-    fun removePill(slot: Int) {
-        var index = slot + 1
-        PillList[index] = null
+    fun add(inhalant: Inhalant) {
+        if (CompleteList.contains(inhalant)) return
+        CompleteList.add(inhalant)
+
     }
 
-    fun removeLiquid(packet: Int) {
-        var index = packet + 1
-        LiquidList[index] = null
+    fun remove(pill: Pill) {
+        if (CompleteList.contains(pill)) return
+        CompleteList.remove(pill)
+    }
+
+    fun remove(liquid: Liquid) {
+        if (CompleteList.contains(liquid)) return
+        CompleteList.remove(liquid)
+    }
+
+    fun remove(inhalant: Inhalant) {
+        if (CompleteList.contains(inhalant)) return
+        CompleteList.remove(inhalant)
+    }
+
+    fun clear() {
+        CompleteList.clear()
     }
 }

@@ -4,8 +4,12 @@ import android.util.Log
 import java.time.LocalDate
 
 abstract class Medication {
-    abstract val total: Any
-    abstract val dose: Any
+    abstract val total: Number
+    abstract val dose: Number
+    abstract val type: String
+
+    open var canDispense: Boolean = false
+
     var name: String = ""
     var Rx: Int? = null
     var NDC: Int? = null

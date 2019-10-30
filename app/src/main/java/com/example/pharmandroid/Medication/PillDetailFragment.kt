@@ -2,6 +2,7 @@ package com.example.pharmandroid.Medication
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,33 +12,18 @@ import android.view.ViewGroup
 
 import com.example.pharmandroid.R
 import kotlinx.android.synthetic.main.fragment_pill_detail.view.*
-import android.widget.DatePicker
 
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
+import android.util.Log
 import android.widget.Button
 import com.example.pharmandroid.Models.Medication.Pill
+import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
+val myFormat = "MM/dd/yyyy"
+val sdf = SimpleDateFormat(myFormat, Locale.US)
 
-
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private var ARG_PARAM1: Pill =
-    Pill()
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [PillDetailFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [PillDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class PillDetailFragment : Fragment() {
     lateinit var preDate: Button
     lateinit var expDate: Button
@@ -52,9 +38,7 @@ class PillDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            pill = ARG_PARAM1
         }
-
     }
 
     override fun onCreateView(
@@ -69,38 +53,39 @@ class PillDetailFragment : Fragment() {
         view.pillExpired.text = "${pill.ExpiryDate.dayOfMonth}/${pill.ExpiryDate.month}/${pill.ExpiryDate.year}"
         view.pillPrescribed.text =
             "${pill.PrescribedDate.dayOfMonth}/${pill.PrescribedDate.month}/${pill.PrescribedDate.year}"
-
-        expDate = view.pillExpired
-        preDate = view.pillPrescribed
-
-        val prescribeddateSetListener = object : DatePickerDialog.OnDateSetListener {
-            override fun onDateSet(
-                view: DatePicker, year: Int, monthOfYear: Int,
-                dayOfMonth: Int
-            ) {
-                precal.set(Calendar.YEAR, year)
-                precal.set(Calendar.MONTH, monthOfYear)
-                precal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                prescribedupdateDateInView()
+        view.saveButton.setOnClickListener {
+            save(view)
+        }
+        view.backButton.setOnClickListener {
+            Log.d("Working", "Working")
+            requireActivity().run {
+                startActivity(Intent(this, MedicationActivity::class.java))
+                finish() // If activity no more needed in back stack
             }
         }
-        val expireddateSetListener = object : DatePickerDialog.OnDateSetListener {
-            override fun onDateSet(
-                view: DatePicker, year: Int, monthOfYear: Int,
-                dayOfMonth: Int
-            ) {
-                expcal.set(Calendar.YEAR, year)
-                expcal.set(Calendar.MONTH, monthOfYear)
-                expcal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                expiredupdateDateInView()
-            }
+        expDate = view.pillExpired
+        preDate = view.pillPrescribed
+        expDate.text = "Expired " + sdf.format(expcal.time)
+        if (expcal.time.before(precal.time)) {
+            expDate.text = "Expired " + sdf.format(expcal.time)
+        } else {
+            expDate.text = "Expires " + sdf.format(expcal.time)
         }
 
         expDate.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 DatePickerDialog(
                     context!!,
-                    expireddateSetListener,
+                    DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                        expcal.set(Calendar.YEAR, year)
+                        expcal.set(Calendar.MONTH, monthOfYear)
+                        expcal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                        if (expcal.time.before(precal.time)) {
+                            expDate.text = "Expired " + sdf.format(expcal.time)
+                        } else {
+                            expDate.text = "Expires " + sdf.format(expcal.time)
+                        }
+                    },
                     // set DatePickerDialog to point to today's date when it loads up
                     expcal.get(Calendar.YEAR),
                     expcal.get(Calendar.MONTH),
@@ -112,28 +97,19 @@ class PillDetailFragment : Fragment() {
             override fun onClick(view: View) {
                 DatePickerDialog(
                     context!!,
-                    prescribeddateSetListener,
+                    DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                        precal.set(Calendar.YEAR, year)
+                        precal.set(Calendar.MONTH, monthOfYear)
+                        precal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                        preDate.text = "Prescribed " + sdf.format(precal.time)
+                    },
                     precal.get(Calendar.YEAR),
                     precal.get(Calendar.MONTH),
                     precal.get(Calendar.DAY_OF_MONTH)
-                    // set DatePickerDialog to point to today's date when it loads up
                 ).show()
             }
         })
-
         return view
-    }
-
-    private fun prescribedupdateDateInView() {
-        val myFormat = "MM/dd/yyyy" // mention the format you need
-        val sdf = SimpleDateFormat(myFormat, Locale.US)
-        preDate.text = sdf.format(precal.time)
-    }
-
-    private fun expiredupdateDateInView() {
-        val myFormat = "MM/dd/yyyy" // mention the format you need
-        val sdf = SimpleDateFormat(myFormat, Locale.US)
-        expDate.text = sdf.format(expcal.time)
     }
 
     override fun onAttach(context: Context) {
@@ -147,8 +123,14 @@ class PillDetailFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        //pill.name = getView()!!.pillName.toString()
         listener = null
+    }
+
+    private fun save(view: View) {
+        Snackbar.make(
+            view, "Saved " + pill.name,
+            Snackbar.LENGTH_LONG
+        ).setAction("Action", null).show()
     }
 
     interface OnFragmentInteractionListener {
@@ -156,12 +138,11 @@ class PillDetailFragment : Fragment() {
     }
 
     companion object {
-        val TAG = PillDetailFragment::class.java.simpleName
         @JvmStatic
         fun newInstance(param1: Pill) =
             PillDetailFragment().apply {
                 arguments = Bundle().apply {
-                    ARG_PARAM1 = param1
+                    pill = param1
                 }
             }
     }

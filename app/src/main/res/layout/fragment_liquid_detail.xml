@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".Manage.UserDetailFragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Manage.UserDetailFragment">
 
     <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/design_default_color_surface"
-            app:cardCornerRadius="10dp"
+            android:layout_height="match_parent"
             app:cardElevation="12dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@android:color/darker_gray"
             app:cardUseCompatPadding="true">
 
         <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:fillViewport="true">
 
             <LinearLayout
@@ -24,270 +25,245 @@
                     android:orientation="vertical"
                     android:paddingBottom="40dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                    <Button
-                            android:id="@+id/saveButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:text="Save"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageButton
-                            android:id="@+id/backButton"
-                            style="@style/Widget.AppCompat.ImageButton"
-                            android:layout_width="84dp"
-                            android:layout_height="44dp"
-                            android:layout_marginStart="1dp"
-                            android:layout_marginTop="1dp"
-                            android:layout_marginEnd="192dp"
-                            android:layout_marginBottom="3dp"
-                            android:background="@color/design_default_color_background"
-                            android:cropToPadding="false"
-                            android:src="@drawable/ic_arrow_back_black_24dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/saveButton"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
                 <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColorHint="@color/design_default_color_background">
+                        android:layout_height="wrap_content">
 
                     <LinearLayout
+                            android:orientation="vertical"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
+                            android:layout_height="match_parent">
 
                         <LinearLayout
+                                android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
+                                android:layout_height="match_parent">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/pillTotal"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
+                                    android:inputType="number"
                                     android:ems="10"
-                                    android:hint="Total"
-                                    android:inputType="number" />
+                                    android:id="@+id/liquidTotal"
+                                    android:layout_weight="1"
+                                    android:hint="Total" />
 
                             <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/pillDose"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
+                                    android:inputType="number"
                                     android:ems="10"
-                                    android:hint="Dose"
-                                    android:inputType="number" />
+                                    android:id="@+id/liquidDose"
+                                    android:layout_weight="1"
+                                    android:hint="Dose" />
                         </LinearLayout>
 
                         <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/pillInfo"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="10"
+                                android:inputType="textMultiLine"
                                 android:gravity="start|top"
-                                android:hint="Information"
-                                android:inputType="textMultiLine" />
+                                android:ems="10"
+                                android:id="@+id/liquidInfo"
+                                android:layout_weight="1"
+                                android:hint="Information" />
 
                         <LinearLayout
-                                android:id="@+id/Week"
+                                android:orientation="horizontal"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="horizontal">
+                                android:id="@+id/Week">
 
                             <com.google.android.material.chip.Chip
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:id="@+id/Mon"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:checkable="true"
                                     android:text="M"
+                                    android:checkable="true"
                                     android:textAlignment="center" />
 
                             <com.google.android.material.chip.Chip
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:id="@+id/Tue"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:checkable="true"
                                     android:text="T"
+                                    android:checkable="true"
                                     android:textAlignment="center" />
 
                             <com.google.android.material.chip.Chip
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:id="@+id/Wed"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:checkable="true"
                                     android:text="W"
+                                    android:checkable="true"
                                     android:textAlignment="center" />
 
                             <com.google.android.material.chip.Chip
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:id="@+id/Thu"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:checkable="true"
                                     android:text="T"
+                                    android:checkable="true"
                                     android:textAlignment="center" />
 
                             <com.google.android.material.chip.Chip
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:id="@+id/Fri"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:checkable="true"
                                     android:text="F"
+                                    android:checkable="true"
                                     android:textAlignment="center" />
 
                             <com.google.android.material.chip.Chip
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:id="@+id/Sat"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:checkable="true"
                                     android:text="S"
+                                    android:checkable="true"
                                     android:textAlignment="center" />
 
                             <com.google.android.material.chip.Chip
-                                    android:id="@+id/Sun"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:id="@+id/Sun"
                                     android:layout_weight="1"
-                                    android:checkable="true"
                                     android:text="S"
+                                    android:checkable="true"
                                     android:textAlignment="center" />
                         </LinearLayout>
 
                         <Button
-                                android:id="@+id/pillPrescribed"
+                                android:text="Prescribed Date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Prescribed Date"
-                                android:textSize="14sp"
-                                app:icon="@drawable/ic_date_range_black_24dp" />
+                                android:id="@+id/liquidPrescribed"
+                                app:icon="@drawable/ic_date_range_black_24dp"
+                                android:textSize="14sp" />
 
                         <Button
-                                android:id="@+id/pillExpired"
+                                android:text="Button"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Button"
-                                android:textSize="14sp"
+                                android:id="@+id/liquidExpired"
+                                tools:text="Expiry Date"
                                 app:icon="@drawable/ic_date_range_black_24dp"
-                                tools:text="Expiry Date" />
+                                android:textSize="14sp" />
 
                         <LinearLayout
+                                android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
+                                android:layout_height="match_parent">
+
+                            <ImageView
+                                    android:src="@drawable/ic_lock_black_24dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/imageView6"
+                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content" />
 
                             <com.google.android.material.chip.ChipGroup
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    app:checkedChip="@id/None"
                                     app:chipSpacingVertical="5dp"
-                                    app:singleSelection="true">
-
-                                <ImageView
-                                        android:id="@+id/imageView4"
-                                        android:layout_width="70dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
-                                        android:src="@drawable/ic_phonelink_lock_black_24dp" />
+                                    app:singleSelection="true"
+                                    app:checkedChip="@id/None">
 
                                 <com.google.android.material.chip.Chip
-                                        android:id="@+id/Fingerprint"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checkable="true"
+                                        android:id="@+id/Fingerprint"
                                         android:text="Fingerprint"
                                         app:checkedIconVisible="true"
-                                        app:chipIconVisible="false" />
+                                        app:chipIconVisible="false"
+                                        android:checkable="true" />
 
                                 <com.google.android.material.chip.Chip
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:id="@+id/PIN"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checkable="true"
                                         android:text="PIN"
+                                        android:checkable="true"
                                         app:checkedIconVisible="true"
                                         app:chipIconVisible="false" />
 
                                 <com.google.android.material.chip.Chip
-                                        android:id="@+id/Password"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checkable="true"
+                                        android:id="@+id/Password"
                                         android:text="Password"
-                                        app:checkedIconVisible="true"
-                                        app:chipIconVisible="false" />
+                                        android:checkable="true"
+                                        app:chipIconVisible="false"
+                                        app:checkedIconVisible="true" />
 
+                                <com.google.android.material.chip.Chip
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/None"
+                                        android:text="None"
+                                        android:checkable="true" />
                             </com.google.android.material.chip.ChipGroup>
                         </LinearLayout>
 
                         <LinearLayout
+                                android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
+                                android:layout_height="match_parent">
+
+                            <ImageView
+                                    android:src="@drawable/ic_phonelink_lock_black_24dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/imageView4"
+                                    android:layout_weight="1" />
 
                             <com.google.android.material.chip.ChipGroup
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    app:checkedChip="@id/phoneNone"
-                                    app:singleSelection="true">
-
-                                <ImageView
-                                        android:id="@+id/imageView7"
-                                        android:layout_width="70dp"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/ic_lock_black_24dp" />
+                                    app:singleSelection="true"
+                                    app:checkedChip="@id/phoneNone">
 
                                 <com.google.android.material.chip.Chip
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:id="@+id/phoneFingerprint"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checkable="true"
-                                        android:text="Fingerprint" />
+                                        android:text="Fingerprint"
+                                        android:checkable="true" />
 
                                 <com.google.android.material.chip.Chip
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:id="@+id/phonePIN"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checkable="true"
-                                        android:text="PIN" />
+                                        android:text="PIN"
+                                        android:checkable="true" />
 
                                 <com.google.android.material.chip.Chip
-                                        android:id="@+id/phonePassword"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checkable="true"
-                                        android:text="Password" />
+                                        android:id="@+id/phonePassword"
+                                        android:text="Password"
+                                        android:checkable="true" />
+
+                                <com.google.android.material.chip.Chip
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/phoneNone"
+                                        android:text="None"
+                                        app:checkedIconVisible="true"
+                                        android:checkable="true" />
                             </com.google.android.material.chip.ChipGroup>
                         </LinearLayout>
 
 
                         <LinearLayout
+                                android:orientation="vertical"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
+                                android:layout_height="match_parent">
 
                             <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/activeIngredients"
@@ -318,7 +294,7 @@
 
                             <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/Rx"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:ems="10"
@@ -328,14 +304,12 @@
                     </LinearLayout>
 
                     <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/pillName"
-                            style="@style/AlertDialog.AppCompat.Light"
+                            android:id="@+id/liquidName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:hint="Name"
                             android:inputType="textPersonName" />
-
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

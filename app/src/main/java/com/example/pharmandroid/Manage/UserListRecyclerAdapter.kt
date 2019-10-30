@@ -61,7 +61,7 @@ class UserListRecyclerAdapter(
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val Name: TextView = mView.userName
-        val Pic: ImageView = mView.userPic
+        val Pic: ImageView = mView.userImage
 
     }
 }
