@@ -10,4 +10,5 @@
         tools:context=".Medication.MedicationListFragment"
         tools:listitem="@layout/med_card"
         android:layout_marginBottom="?attr/actionBarSize"
-        android:layout_marginTop="?attr/actionBarSize" />
+        android:layout_marginTop="?attr/actionBarSize"
+        />

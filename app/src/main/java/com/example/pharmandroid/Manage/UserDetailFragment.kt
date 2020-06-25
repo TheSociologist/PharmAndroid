@@ -15,21 +15,9 @@ import android.icu.util.Calendar
 import android.widget.Button
 import com.example.pharmandroid.Models.User.User
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private var ARG_PARAM1: User =
     User()
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [PillDetailFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [PillDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class UserDetailFragment : Fragment() {
     private var user: User =
         User()

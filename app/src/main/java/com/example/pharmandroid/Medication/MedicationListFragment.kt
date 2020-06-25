@@ -1,7 +1,6 @@
 package com.example.pharmandroid.Medication
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -57,7 +56,7 @@ class MedicationListFragment : Fragment() {
         pill3.total = 26.0
         pill3.dose = 3.0
         pill3.Information =
-            "Albuterol is a stimulant used to respiratory distress."
+            "Albuterol is a stimulant used to relieve respiratory distress."
 
 
         var liquid = Liquid()
@@ -71,7 +70,7 @@ class MedicationListFragment : Fragment() {
         medicationList.add(pill3)
         medicationList.add(liquid)
 
-        val view = inflater.inflate(R.layout.fragment_medicationlist_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_medication_list, container, false)
 
         if (view is RecyclerView) {
             with(view) {

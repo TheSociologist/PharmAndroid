@@ -3,63 +3,98 @@
              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".Manage.UserDetailFragment">
+             tools:context=".Manage.UserDetailFragment"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_marginTop="?attr/actionBarSize">
 
-    <com.google.android.material.card.MaterialCardView
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/design_default_color_surface"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="12dp"
-            app:cardUseCompatPadding="true">
+            android:layout_height="match_parent">
 
-        <androidx.core.widget.NestedScrollView
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fillViewport="true">
+                android:orientation="vertical" >
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingBottom="40dp">
+                    app:cardBackgroundColor="@color/design_default_color_surface"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="12dp"
+                    app:cardUseCompatPadding="true">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="40dp">
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constraintLayout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        <Button
+                                android:id="@+id/saveButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:text="Save"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                                android:id="@+id/backButton"
+                                style="@style/Widget.AppCompat.ImageButton"
+                                android:layout_width="84dp"
+                                android:layout_height="44dp"
+                                android:layout_marginStart="1dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginEnd="192dp"
+                                android:layout_marginBottom="3dp"
+                                android:background="@color/design_default_color_background"
+                                android:cropToPadding="false"
+                                android:src="@drawable/ic_arrow_back_black_24dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/saveButton"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                     <Button
-                            android:id="@+id/saveButton"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/pillDispense"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:text="Save"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:text="Dispense"
+                            android:textSize="14sp"/>
 
-                    <ImageButton
-                            android:id="@+id/backButton"
-                            style="@style/Widget.AppCompat.ImageButton"
-                            android:layout_width="84dp"
-                            android:layout_height="44dp"
-                            android:layout_marginStart="1dp"
-                            android:layout_marginTop="1dp"
-                            android:layout_marginEnd="192dp"
-                            android:layout_marginBottom="3dp"
-                            android:background="@color/design_default_color_background"
-                            android:cropToPadding="false"
-                            android:src="@drawable/ic_arrow_back_black_24dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/saveButton"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/pillName"
+                            style="@style/AlertDialog.AppCompat.Light"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Name"
+                            android:inputType="textPersonName" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColorHint="@color/design_default_color_background">
+                    <com.google.android.material.tabs.TabLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="General" />
+
+                        <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Dispense" />
+
+                    </com.google.android.material.tabs.TabLayout>
 
                     <LinearLayout
                             android:layout_width="match_parent"
@@ -106,6 +141,24 @@
                                 android:gravity="start|top"
                                 android:hint="Information"
                                 android:inputType="textMultiLine" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/NDC"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:ems="10"
+                                android:hint="NDC"
+                                android:inputType="number" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/Rx"
+                                android:layout_width="391dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:ems="10"
+                                android:hint="Rx"
+                                android:inputType="number" />
 
                         <LinearLayout
                                 android:id="@+id/Week"
@@ -202,7 +255,6 @@
                             <com.google.android.material.chip.ChipGroup
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    app:checkedChip="@id/None"
                                     app:chipSpacingVertical="5dp"
                                     app:singleSelection="true">
 
@@ -251,7 +303,6 @@
                             <com.google.android.material.chip.ChipGroup
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    app:checkedChip="@id/phoneNone"
                                     app:singleSelection="true">
 
                                 <ImageView
@@ -307,37 +358,13 @@
                                     android:hint="Inactive Ingredients"
                                     android:inputType="textPersonName" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/NDC"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:ems="10"
-                                    android:hint="NDC"
-                                    android:inputType="number" />
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/Rx"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:ems="10"
-                                    android:hint="Rx"
-                                    android:inputType="number" />
                         </LinearLayout>
                     </LinearLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/pillName"
-                            style="@style/AlertDialog.AppCompat.Light"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ems="10"
-                            android:hint="Name"
-                            android:inputType="textPersonName" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
 </FrameLayout>

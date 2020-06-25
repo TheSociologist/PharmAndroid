@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.pharmandroid.MainActivity
 import com.example.pharmandroid.R
 
 

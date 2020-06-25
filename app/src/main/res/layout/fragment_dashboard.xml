@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/medicationList"
-        android:name="com.example.pharmandroid.Pills.MedicationListFragment"
+        android:name="com.example.pharmandroid.Medication.MedicationListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        app:layoutManager="LinearLayoutManager"
+        android:background="@color/design_default_color_background"
+        android:padding="4dp"
         tools:context=".Medication.MedicationListFragment"
-        tools:listitem="@layout/notification_card"/>
+        tools:listitem="@layout/notification_card"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_marginTop="?attr/actionBarSize" />

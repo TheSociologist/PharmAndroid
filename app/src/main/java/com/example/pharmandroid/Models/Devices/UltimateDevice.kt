@@ -4,7 +4,7 @@ import com.example.pharmandroid.Models.User.User
 import com.example.pharmandroid.Models.Medication.Liquid
 import com.example.pharmandroid.Models.Medication.Pill
 
-class UltimateDevice : DeviceBase() {
+class UltimateDevice : Device() {
     override var _id: String? = null
     override var pills: Array<Pill?> =
         arrayOf(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
